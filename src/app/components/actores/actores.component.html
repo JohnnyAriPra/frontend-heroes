@@ -1,0 +1,77 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+
+<mat-card *ngIf="!loading" class="mx-20 my-4">
+    <mat-card-title>
+        <mat-toolbar color="secondary">
+            <span>Heroes</span>
+            <button mat-raised-button color="primary" class="ml-auto" (click)="createActor()">
+                    <mat-icon>add</mat-icon>
+                    <span>Agregar Heroe</span>
+                </button>
+        </mat-toolbar>
+        <mat-form-field>
+            <mat-label>Buscar</mat-label>
+            <input matInput (keyup)="filterActorData($event)" #input>
+        </mat-form-field>
+    </mat-card-title>
+    <mat-card-content class="dashboard-card-content">
+        <div class="mat-elevation-z8" style="overflow: auto;">
+            <table mat-table [dataSource]="actorData">
+                <!-- ID Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="w-0"> ID. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- Nombre Column -->
+                <ng-container matColumnDef="nombre">
+                    <th mat-header-cell *matHeaderCellDef class="w-15"> Nombre </th>
+                    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+                </ng-container>
+
+                <!-- Nombre Real Column -->
+                <ng-container matColumnDef="bio">
+                    <th mat-header-cell *matHeaderCellDef class="w-15"> Bio </th>
+                    <td mat-cell *matCellDef="let element"> {{element.bio}} </td>
+                </ng-container>
+
+                <!-- Fecha de Nacimiento column-->
+                <ng-container matColumnDef="img">
+                    <th mat-header-cell *matHeaderCellDef class="w-5" style="text-align: center;"> IMG </th>
+                    <td mat-cell *matCellDef="let element"> {{element.img}} </td>
+                </ng-container>
+
+                <!-- Fecha de Muerte Column -->
+                <ng-container matColumnDef="aparicion">
+                    <th mat-header-cell *matHeaderCellDef class="w-5" style="text-align: center;"> Aparicion </th>
+                    <td mat-cell *matCellDef="let element"> {{element.aparicion}} </td>
+                </ng-container>
+
+                <!-- Nacionalidad Column -->
+                <ng-container matColumnDef="casa">
+                    <th mat-header-cell *matHeaderCellDef class="w-15"> Casa </th>
+                    <td mat-cell *matCellDef="let element"> {{element.casa}} </td>
+                </ng-container>
+
+                <!-- Acciones Column -->
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef class="w-5">Acciones</th>
+                    <td mat-cell *matCellDef="let element" style="text-align: start;">
+                        <a class="pointer text-sky-700" matTooltip="Editar Actor" (click)="updateActor(element)">
+                            <mat-icon>edit</mat-icon>
+                        </a>
+                        <a class="pointer text-red-500" matTooltip="Eliminar Actor" (click)="deleteActor(element.cod_act)">
+                            <mat-icon>delete</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

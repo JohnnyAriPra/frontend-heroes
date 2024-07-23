@@ -1,0 +1,61 @@
+<h2 mat-dialog-title>{{ accionTitle }} Heroe</h2>
+<hr>
+<mat-dialog-content>
+    <form [formGroup]="actorForm">
+        <div class="grid grid-cols-2">
+            <div>
+                <mat-grid-list cols="1" rowHeight="80px">
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>ID</mat-label>
+                            <input matInput autocomplete="off" formControlName="id" placeholder="A000">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Nombre</mat-label>
+                            <input matInput autocomplete="off" formControlName="nombre">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Bio</mat-label>
+                            <input matInput autocomplete="off" formControlName="bio">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>IMG</mat-label>
+                            <input matInput formControlName="img">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+            <div>
+                <mat-grid-list cols="1" rowHeight="80px">
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Aparicion</mat-label>
+                            <input matInput [matDatepicker]="aparicion" formControlName="aparicion">
+                            <mat-hint>MM/DD/YYYY</mat-hint>
+                            <mat-datepicker-toggle matIconSuffix [for]="aparicion"></mat-datepicker-toggle>
+                            <mat-datepicker #aparicion></mat-datepicker>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        <mat-form-field>
+                            <mat-label>Casa</mat-label>
+                            <input matInput autocomplete="off" formControlName="casa">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </div>
+        </div>
+    </form>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+    <button mat-raised-button color="primary" [disabled]="actorForm.invalid" (click)="guardarActor()">{{ accionButton }}</button>
+</mat-dialog-actions>
